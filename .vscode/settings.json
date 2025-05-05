@@ -66,5 +66,5 @@
     "explorer.fileNesting.patterns": {
         "*.sln": "*.csproj"
     },
-    "dotnet.defaultSolution": "Top-Down-Brotato-Like.sln"
+    "dotnet.defaultSolution": "Top Down Brotato Like.sln"
 }
