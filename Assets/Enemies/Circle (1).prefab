@@ -10,12 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 5654590185532843321}
   - component: {fileID: 2676842530339063381}
+  - component: {fileID: 7647037717345579804}
   - component: {fileID: 7073554591856776274}
   - component: {fileID: 7143983623669427797}
-  - component: {fileID: 7647037717345579804}
-  m_Layer: 0
+  - component: {fileID: 7781268952891142440}
+  m_Layer: 6
   m_Name: Circle (1)
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -90,6 +91,22 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
+--- !u!114 &7647037717345579804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5377888134458916783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 590df92bc27b13642b6ed2ec4b5651ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 3.5
+  attackDamage: 10
+  attackCooldown: 1.5
+  attackRange: 1
 --- !u!58 &7073554591856776274
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -148,7 +165,7 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &7647037717345579804
+--- !u!114 &7781268952891142440
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -157,7 +174,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 5377888134458916783}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 590df92bc27b13642b6ed2ec4b5651ee, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ea2adb14c8e36841867d50a4704da5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3.5
+  maxHealth: 50
+  currentHealth: 0

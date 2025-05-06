@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 7073554591856776274}
   - component: {fileID: 7143983623669427797}
   - component: {fileID: 7647037717345579804}
-  m_Layer: 0
+  - component: {fileID: -6616268559919065268}
+  m_Layer: 6
   m_Name: Onur
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -161,3 +162,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
+  attackDamage: 10
+  attackCooldown: 1.5
+  attackRange: 1
+--- !u!114 &-6616268559919065268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5377888134458916783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ea2adb14c8e36841867d50a4704da5e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 50
+  currentHealth: 0

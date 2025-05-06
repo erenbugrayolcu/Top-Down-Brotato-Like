@@ -2,15 +2,21 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public GameObject[] enemyPrefabs; // farklı düşman türleri
-    public float spawnRadius = 20f;
+    public GameObject[] enemyPrefabs;
     public int maxEnemies = 10;
     public Transform player;
+    public BoxCollider2D Spawnabl; // doğma alanı
 
     private int currentEnemyCount = 0;
 
     private void Start()
     {
+        if (Spawnabl == null)
+        {
+            Debug.LogError("Spawnabl (BoxCollider2D) atanmadı.");
+            return;
+        }
+
         InvokeRepeating(nameof(SpawnEnemy), 2f, 5f);
     }
 
@@ -18,11 +24,11 @@ public class EnemySpawner : MonoBehaviour
     {
         if (currentEnemyCount >= maxEnemies) return;
 
-        Vector3 spawnPos = GetRandomSpawnPosition();
+        Vector3 spawnPos = GetRandomPointInArea();
 
         int randomIndex = Random.Range(0, enemyPrefabs.Length);
         GameObject enemy = Instantiate(enemyPrefabs[randomIndex], spawnPos, Quaternion.identity);
-        
+
         EnemyBase enemyScript = enemy.GetComponent<EnemyBase>();
         if (enemyScript != null)
             enemyScript.SetTarget(player);
@@ -30,29 +36,23 @@ public class EnemySpawner : MonoBehaviour
         currentEnemyCount++;
     }
 
-    Vector3 GetRandomSpawnPosition()
-{
-    Vector3 spawnPosition;
-    int maxAttempts = 10; // Rastgele pozisyon bulmak için maksimum deneme sayısı
-    int attempts = 0;
-
-    do
+    Vector3 GetRandomPointInArea()
     {
-        Vector2 randomPos = Random.insideUnitCircle.normalized * spawnRadius;
-        spawnPosition = player.position + new Vector3(randomPos.x, randomPos.y, 0);
-        spawnPosition.z = 0f;
+        Bounds bounds = Spawnabl.bounds;
 
-        attempts++;
+        float x = Random.Range(bounds.min.x, bounds.max.x);
+        float y = Random.Range(bounds.min.y, bounds.max.y);
+
+        return new Vector3(x, y, 0f);
     }
-    while (!IsPositionOnGround(spawnPosition) && attempts < maxAttempts);
 
-    return spawnPosition;
-}
-
-bool IsPositionOnGround(Vector3 position)
-{
-    // "Ground" layer'ını kontrol etmek için bir 2D çember çarpışma testi
-    Collider2D hit = Physics2D.OverlapPoint(position, LayerMask.GetMask("Ground"));
-    return hit != null;
-}
+    // sahnede kutuyu gösterelim
+    private void OnDrawGizmos()
+    {
+        if (Spawnabl != null)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireCube(Spawnabl.bounds.center, Spawnabl.bounds.size);
+        }
+    }
 }
